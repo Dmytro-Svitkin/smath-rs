@@ -1,6 +1,7 @@
 [package]
-name = "smath-rs"
+name = "smath"
 version = "0.1.0"
 edition = "2024"
-
+description = "Lightweight, optimized mathematical utilities."
+license = "MIT"
 [dependencies]
