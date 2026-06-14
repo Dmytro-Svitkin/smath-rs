@@ -1,4 +1,4 @@
-use smath::*;
+use smath::trigonometry::*;
 
 #[test]
 fn test_degrees(){
