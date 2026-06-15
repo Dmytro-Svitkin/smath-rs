@@ -107,4 +107,17 @@ pub mod trigonometry{
     x*(0.66666667+rcl*0.33333333)
     }
 
+    /// Simplified arc-cosinus function (degrees, 45.0 = 45°).
+    #[inline]
+    pub fn arccos(x:f32)->f32{
+    90.0-arcsin(x)
+    }
+
+    /// Simplified arc-cosinus function (radians, 1.0 = π).
+    #[inline]
+    pub fn arccos(x:f32)->f32{
+    1.0-arcsinr(x)
+    }
+    
+
 }
