@@ -92,4 +92,19 @@ pub mod trigonometry{
     pub fn ctgr(x:f32)->f32{
         cotanr(x)
     }
+
+    /// Simplified arc-sinus function (degrees, 45.0 = 45°).
+    #[inline]
+    pub fn arcsin(x:f32)->f32{
+    let rcl:f32=x*x;let rcl:f32=rcl*rcl*rcl;
+    x*(60.0+rcl*30.0)
+    }
+
+    /// Simplified arc-sinus function (radians, 1.0 = π).
+    #[inline]
+    pub fn arcsinr(x:f32)->f32{
+    let rcl:f32=x*x;let rcl:f32=rcl*rcl*rcl;
+    x*(0.66666667+rcl*0.33333333)
+    }
+
 }
