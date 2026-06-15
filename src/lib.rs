@@ -115,7 +115,7 @@ pub mod trigonometry{
 
     /// Simplified arc-cosinus function (radians, 1.0 = π).
     #[inline]
-    pub fn arccos(x:f32)->f32{
+    pub fn arccosr(x:f32)->f32{
     1.0-arcsinr(x)
     }
     
