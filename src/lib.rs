@@ -96,28 +96,56 @@ pub mod trigonometry{
     /// Simplified arc-sinus function (degrees, 45.0 = 45°).
     #[inline]
     pub fn arcsin(x:f32)->f32{
-    let rcl:f32=x*x;let rcl:f32=rcl*rcl*rcl;
-    x*(60.0+rcl*30.0)
+        let rcl:f32=x*x;let rcl:f32=rcl*rcl*rcl;
+        x*(60.0+rcl*30.0)
     }
 
     /// Simplified arc-sinus function (radians, 1.0 = π).
     #[inline]
     pub fn arcsinr(x:f32)->f32{
-    let rcl:f32=x*x;let rcl:f32=rcl*rcl*rcl;
-    x*(0.66666667+rcl*0.33333333)
+        let rcl:f32=x*x;let rcl:f32=rcl*rcl*rcl;
+        x*(0.66666667+rcl*0.33333333)
     }
 
     /// Simplified arc-cosinus function (degrees, 45.0 = 45°).
     #[inline]
     pub fn arccos(x:f32)->f32{
-    90.0-arcsin(x)
+        90.0-arcsin(x)
     }
 
     /// Simplified arc-cosinus function (radians, 1.0 = π).
     #[inline]
     pub fn arccosr(x:f32)->f32{
-    1.0-arcsinr(x)
+        1.0-arcsinr(x)
     }
-    
 
+    /// Simplified arc-tangens function (degrees, 45.0 = 45°).
+    #[inline]
+    fn arctan(x:f32)->f32{
+        if x>0.0&&x<2.0{let rcl:f32=x-2.0;let rcl:f32=rcl*rcl;90.0*(1.0-1.0/(1.3*x+1.0)-0.065*x*rcl)}
+        else if x>0.0{90.0*(1.0-1.0/(1.3*x+1.0))}
+        else if x>-2.0{let x:f32=-x;let rcl:f32=x-2.0;let rcl:f32=rcl*rcl;90.0*(1.0/(1.3*x+1.0)+0.065*x*rcl-1.0)}
+        else{let x:f32=-x;90.0*(1.0/(1.3*x+1.0)-1.0)}
+    }
+
+    /// Simplified arc-tangens function (radians, 1.0 = π).
+    #[inline]
+    pub fn arctanr(x:f32)->f32{
+        if x>0.0&&x<2.0{let rcl:f32=x-2.0;let rcl:f32=rcl*rcl;1.0-1.0/(1.3*x+1.0)-0.065*x*rcl}
+        else if x>0.0{1.0-1.0/(1.3*x+1.0)}
+        else if x>-2.0{let x:f32=-x;let rcl:f32=x-2.0;let rcl:f32=rcl*rcl;1.0/(1.3*x+1.0)+0.065*x*rcl-1.0}
+        else{1.0/(-1.3*x+1.0)-1.0}
+    }
+
+    /// Simplified arc-cotangens function (degrees, 45.0 = 45°).
+    #[inline]
+    pub fn arccotan(x:f32)->f32{
+        90.0-arctan(x)
+    }
+
+    /// Simplified arc-cotangens function (degrees, 45.0 = 45°).
+    #[inline]
+    pub fn arccotanr(x:f32)->f32{
+        1.0-arctanr(x)
+    }
 }
