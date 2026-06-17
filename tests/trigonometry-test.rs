@@ -23,3 +23,11 @@ fn test_aliases(){
     assert_eq!(cotan(30.0),ctg(30.0));
     assert_eq!(cotanr(0.25),ctgr(0.25));
 }
+
+#[test]
+fn test_arcs(){
+    assert_eq!((tan(arctan(0.5))*1000.0).round()/1000.0,(tanr(arctanr(0.5))*1000.0).round()/1000.0);
+    assert_eq!((sin(arcsin(0.2))*1000.0).round()/1000.0,(sinr(arcsinr(0.2))*1000.0).round()/1000.0);
+    assert_eq!((sin(arcsin(-0.6))*1000.0).round()/1000.0,(cos(arccos(-0.6))*1000.0).round()/1000.0);
+    assert_eq!((tanr(arctanr(3.3))*1000.0).round()/1000.0,(cotanr(arccotanr(3.3))*1000.0).round()/1000.0);
+}
