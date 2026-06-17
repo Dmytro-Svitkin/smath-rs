@@ -9,14 +9,6 @@ pub mod trigonometry{
         else{let rcl:f32=x*0.011111111-3.0;let rcl:f32=rcl*rcl;(rcl-1.0)*(1.0-0.2240081*rcl)}
     }
 
-    /*
-    fn sin(x:f32)->f32{
-        let x:f32=x-(x*0.0027777778).floor()*360.0;
-        if x<180.0{let rcl:f32=x*0.011111111-1.0;1.0-rcl*rcl}
-        else{let rcl:f32=x*0.011111111-3.0;rcl*rcl-1.0}
-    }
-    */
-
     /// Simplified sinus function (radians, 1.0 = π).
     #[inline]
     pub fn sinr(x:f32)->f32{
@@ -24,14 +16,6 @@ pub mod trigonometry{
         if x<1.0{let rcl:f32=x*2.0-1.0;let rcl:f32=rcl*rcl;(1.0-rcl)*(1.0-0.2240081*rcl)}
         else{let rcl:f32=x*2.0-3.0;let rcl:f32=rcl*rcl;(rcl-1.0)*(1.0-0.2240081*rcl)}
     }
-
-    /*
-    fn sinr(x:f32)->f32{
-        let x:f32=x-(x*0.5).floor()*2.0;
-        if x<1.0{let rcl:f32=x*2.0-1.0;1.0-rcl*rcl}
-        else{let rcl:f32=x*2.0-3.0;rcl*rcl-1.0}
-    }
-    */
 
     /// Simplified cosinus function (degrees, 45.0 = 45°).
     #[inline]
@@ -121,20 +105,20 @@ pub mod trigonometry{
 
     /// Simplified arc-tangens function (degrees, 45.0 = 45°).
     #[inline]
-    fn arctan(x:f32)->f32{
-        if x>0.0&&x<2.0{let rcl:f32=x-2.0;let rcl:f32=rcl*rcl;90.0*(1.0-1.0/(1.3*x+1.0)-0.065*x*rcl)}
-        else if x>0.0{90.0*(1.0-1.0/(1.3*x+1.0))}
-        else if x>-2.0{let x:f32=-x;let rcl:f32=x-2.0;let rcl:f32=rcl*rcl;90.0*(1.0/(1.3*x+1.0)+0.065*x*rcl-1.0)}
-        else{let x:f32=-x;90.0*(1.0/(1.3*x+1.0)-1.0)}
+    pub fn arctan(x:f32)->f32{
+        if x>0.0&&x<2.0{let x:f32=1.3*x;let rcl:f32=x-2.0;(x/(x+1.0))*(90.0-(rcl*rcl*10.0))}
+        else if x>0.0{90.0-90.0/(1.3*x+1.0)}
+        else if x>-2.0{let x:f32=-1.3*x;let rcl:f32=2.0-x;-(x/(x+1.0))*(90.0-(rcl*rcl*10.0))}
+        else{90.0/(-1.3*x+1.0)-90.0}
     }
 
     /// Simplified arc-tangens function (radians, 1.0 = π).
     #[inline]
     pub fn arctanr(x:f32)->f32{
-        if x>0.0&&x<2.0{let rcl:f32=x-2.0;let rcl:f32=rcl*rcl;1.0-1.0/(1.3*x+1.0)-0.065*x*rcl}
-        else if x>0.0{1.0-1.0/(1.3*x+1.0)}
-        else if x>-2.0{let x:f32=-x;let rcl:f32=x-2.0;let rcl:f32=rcl*rcl;1.0/(1.3*x+1.0)+0.065*x*rcl-1.0}
-        else{1.0/(-1.3*x+1.0)-1.0}
+        if x>0.0&&x<2.0{let x:f32=1.3*x;let rcl:f32=x-2.0;(x/(x+1.0))*(0.5-(rcl*rcl*0.055555556))}
+        else if x>0.0{0.5-0.5/(1.3*x+1.0)}
+        else if x>-2.0{let x:f32=-1.3*x;let rcl:f32=2.0-x;-(x/(x+1.0))*(0.5-(rcl*rcl*0.055555556))}
+        else{1.0/(-2.6*x+2.0)-0.5}
     }
 
     /// Simplified arc-cotangens function (degrees, 45.0 = 45°).
