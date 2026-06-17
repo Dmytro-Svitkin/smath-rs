@@ -1,10 +1,25 @@
+#![no_std]
+
+#[inline(always)]
+fn floor(x:f32)->f32{
+    let rcl:i32=x as i32;
+    if x<rcl as f32{(rcl-1)as f32}else {rcl as f32}
+}
+
+#[inline(always)]
+fn round(x:f32)->f32{
+  floor(x+0.5)
+}
+
 pub use trigonometry::*;
 
 pub mod trigonometry{
+    use super::{floor,round};
+
     /// Simplified sinus function (degrees, 45.0 = 45°).
     #[inline]
     pub fn sin(x:f32)->f32{
-        let x:f32=x-(x*0.0027777778).floor()*360.0;
+        let x:f32=x-floor(x*0.0027777778)*360.0;
         if x<180.0{let rcl:f32=x*0.011111111-1.0;let rcl:f32=rcl*rcl;(1.0-rcl)*(1.0-0.2240081*rcl)}
         else{let rcl:f32=x*0.011111111-3.0;let rcl:f32=rcl*rcl;(rcl-1.0)*(1.0-0.2240081*rcl)}
     }
@@ -12,7 +27,7 @@ pub mod trigonometry{
     /// Simplified sinus function (radians, 1.0 = π).
     #[inline]
     pub fn sinr(x:f32)->f32{
-        let x:f32=x-(x*0.5).floor()*2.0;
+        let x:f32=x-floor(x*0.5)*2.0;
         if x<1.0{let rcl:f32=x*2.0-1.0;let rcl:f32=rcl*rcl;(1.0-rcl)*(1.0-0.2240081*rcl)}
         else{let rcl:f32=x*2.0-3.0;let rcl:f32=rcl*rcl;(rcl-1.0)*(1.0-0.2240081*rcl)}
     }
@@ -32,7 +47,7 @@ pub mod trigonometry{
     /// Simplified tangens function (degrees, 45.0 = 45°).
     #[inline]
     pub fn tan(x:f32)->f32{
-        let x:f32=x*0.0055555556;let x:f32=(x-x.round())*180.0;
+        let x:f32=x*0.0055555556;let x:f32=(x-round(x))*180.0;
         let rcl:f32=x*x;(x*(141.37167-0.0031465*rcl))/(8100.0-rcl)
     }
 
@@ -43,7 +58,7 @@ pub mod trigonometry{
     /// Simplified tangens function (radians, 1.0 = π).
     #[inline]
     pub fn tanr(x:f32)->f32{
-        let x:f32=x-x.round();
+        let x:f32=x-round(x);
         let rcl:f32=x*x;(x*(0.78539816-0.5663706*rcl))/(0.25-rcl)
     }
 
