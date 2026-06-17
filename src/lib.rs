@@ -88,7 +88,7 @@ pub mod trigonometry{
     #[inline]
     pub fn arcsinr(x:f32)->f32{
         let rcl:f32=x*x;let rcl:f32=rcl*rcl*rcl;
-        x*(0.66666667+rcl*0.33333333)
+        x*(0.33333334+rcl*0.16666667)
     }
 
     /// Simplified arc-cosinus function (degrees, 45.0 = 45°).
@@ -100,7 +100,7 @@ pub mod trigonometry{
     /// Simplified arc-cosinus function (radians, 1.0 = π).
     #[inline]
     pub fn arccosr(x:f32)->f32{
-        1.0-arcsinr(x)
+        0.5-arcsinr(x)
     }
 
     /// Simplified arc-tangens function (degrees, 45.0 = 45°).
@@ -130,6 +130,6 @@ pub mod trigonometry{
     /// Simplified arc-cotangens function (degrees, 45.0 = 45°).
     #[inline]
     pub fn arccotanr(x:f32)->f32{
-        1.0-arctanr(x)
+        0.5-arctanr(x)
     }
 }
