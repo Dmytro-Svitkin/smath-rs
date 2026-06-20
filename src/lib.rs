@@ -8,7 +8,8 @@ fn floor(x:f32)->f32{
 
 #[inline(always)]
 fn round(x:f32)->f32{
-  floor(x+0.5)
+  if x>0.0{floor(x+0.5)}
+  else {-floor(-x+0.5)}
 }
 
 pub use trigonometry::*;
