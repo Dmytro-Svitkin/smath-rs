@@ -3,7 +3,7 @@
 #[inline(always)]
 fn floor(x:f32)->f32{
     let rcl:i32=x as i32;
-    if x<rcl as f32{(rcl-1)as f32}else {rcl as f32}
+    if x<rcl as f32{(rcl-1)as f32}else{rcl as f32}
 }
 
 #[inline(always)]
@@ -13,7 +13,6 @@ fn round(x:f32)->f32{
 }
 
 pub use trigonometry::*;
-pub use conversion::*;
 
 pub mod trigonometry{
     use super::{floor,round};
@@ -148,145 +147,5 @@ pub mod trigonometry{
     #[inline]
     pub fn arccotanr(x:f32)->f32{
         0.5-arctanr(x)
-    }
-}
-
-pub mod conversion{
-    pub mod length{
-        /// Convert inches to millimeters.
-        #[inline]
-        pub const fn in_mm(x:f32)->f32{
-            x*25.4
-        }
-
-        /// Convert inches to millimeters.
-        #[inline(always)]
-        pub const fn inches_millimeters(x:f32)->f32{
-            in_mm(x)
-        }
-
-        /// Convert millimeters to inches.
-        #[inline]
-        pub const fn mm_in(x:f32)->f32{
-            x*0.03937007874015748
-        }
-
-        /// Convert millimeters to inches.
-        #[inline(always)]
-        pub const fn millimeters_inches(x:f32)->f32{
-            mm_in(x)
-        }
-        
-        /// Convert feet to meters.
-        #[inline]
-        pub const fn ft_m(x:f32)->f32{
-            x*0.3048
-        }
-
-        /// Convert feet to meters.
-        #[inline(always)]
-        pub const fn feet_meters(x:f32)->f32{
-            ft_m(x)
-        }
-
-        /// Convert meters to feet.
-        #[inline]
-        pub const fn m_ft(x:f32)->f32{
-            x*3.280839895013123
-        }
-
-        /// Convert meters to feet.
-        #[inline(always)]
-        pub const fn meters_feet(x:f32)->f32{
-            m_ft(x)
-        }
-
-        /// Convert yards to meters.
-        #[inline]
-        pub const fn yd_m(x:f32)->f32{
-            x*0.9144
-        }
-
-        /// Convert yards to meters.
-        #[inline(always)]
-        pub const fn yards_meters(x:f32)->f32{
-            yd_m(x)
-        }
-
-        /// Convert meters to yards.
-        #[inline]
-        pub const fn m_yd(x:f32)->f32{
-            x*1.0936132983377078
-        }
-
-        /// Convert meters to yards.
-        #[inline(always)]
-        pub const fn meters_yards(x:f32)->f32{
-            m_yd(x)
-        }
-        
-        /// Convert miles to kilometers.
-        #[inline]
-        pub const fn mi_km(x:f32)->f32{
-            x*1.609344
-        }
-
-        /// Convert miles to kilometers.
-        #[inline(always)]
-        pub const fn miles_kilometers(x:f32)->f32{
-            mi_km(x)
-        }
-
-        /// Convert kilometers to miles.
-        #[inline]
-        pub const fn km_mi(x:f32)->f32{
-            x*0.621371192237334
-        }
-
-        /// Convert kilometers to miles.
-        #[inline(always)]
-        pub const fn kilometers_miles(x:f32)->f32{
-            km_mi(x)
-        }
-
-        /// Convert nautical miles to kilometers.
-        #[inline]
-        pub const fn nmi_km(x:f32)->f32{
-            x*1.852
-        }
-
-        /// Convert nautical miles to kilometers.
-        #[inline(always)]
-        pub const fn nautical_kilometers(x:f32)->f32{
-            nmi_km(x)
-        }
-
-        /// Convert nautical miles to kilometers.
-        #[inline(always)]
-        pub const fn nauticalmiles_kilometers(x:f32)->f32{
-            nmi_km(x)
-        }
-
-        /// Convert kilometers to nautical miles.
-        #[inline]
-        pub const fn km_nmi(x:f32)->f32{
-            x*0.5399568034557235
-        }
-
-        /// Convert kilometers to nautical miles.
-        #[inline(always)]
-        pub const fn kilometers_nautical(x:f32)->f32{
-            km_nmi(x)
-        }
-
-        /// Convert kilometers to nautical miles.
-        #[inline(always)]
-        pub const fn kilometers_nauticalmiles(x:f32)->f32{
-            km_nmi(x)
-        }
-    }
-
-    pub mod weight{
-
     }
 }
