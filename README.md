@@ -10,7 +10,24 @@
 `sin`, `cos`, `tan`, `cotan`, `arcsin`, `arccos`, `arctan`, `arccotan`
 
 ### Unit Conversions (`smath::conversion`)
-`in_mm`, `mm_in`, `ft_m`, `m_ft`, `yd_m`, `m_yd`, `mi_km`, `km_mi`, `nmi_km`, `km_nmi`, `oz_g`, `g_oz`, `lb_kg`, `kg_lb`, `st_kg`, `kg_st`, `tn_t`, `t_tn`, `floz_ml`, `ml_floz`, `cp_ml`, `ml_cp`, `pt_l`, `l_pt`, `qt_l`, `l_qt`, `gal_l`, `l_gal`, `c_f`, `f_c`, `c_k`, `k_c`, `f_k`, `k_f`, `mph_kmh`, `kmh_mph`, `kt_kmh`, `kmh_kt`, `mach_ms`, `ms_mach`, `psi_pa`, `pa_psi`, `bar_pa`, `pa_bar`, `atm_pa`, `pa_atm`, `j_cal`, `cal_j`, `hp_w`, `w_hp`
+All conversion functions follow a predictable strict shortcut format: `[from]_[to](value)` (e.g., `cm_inches(123.456)`, `second_hours(5.5)`). 
+Only primary units are listed below, but all cross-combinations and major aliases (e.g., `inch`, `inches`) are fully supported.
+
+| Category | Module Path | Supported Units (From / To) |
+| :--- | :--- | :--- |
+| **Length** | `smath::length::` | `mm`, `cm`, `dm`, `m`, `km`, `in`, `ft`, `yd`, `mi`, `nmi` |
+| **Weight** | `smath::weight::` | `mg`, `g`, `kg`, `oz`, `lb`, `st`, `tn`, `t` |
+| **Volume** | `smath::volume::` | `ml`, `l`, `floz`, `cp`, `pt`, `qt`, `gal` |
+| **Speed** | `smath::speed::` | `mps`, `kmh`, `mph`, `kt`, `mach` |
+| **Pressure**| `smath::pressure::`| `pa`, `psi`, `bar`, `atm` |
+| **Energy** | `smath::energy::` | `j`, `cal`, `hp`, `w` |
+| **Time** | `smath::time::` | `ms`, `s`, `min`, `h`, `d`, `wk`, `mo`, `yr` |
+
+```rust
+// Example Usage
+let millimeters = smath::length::in_mm(2.0); // 2 inches are converted to millimeters
+let hours = smath::time::d_h(1.5); // 1.5 of a day is converted to hours
+```
 
 ## Installation
 
@@ -18,7 +35,7 @@ Add `smath` to your `Cargo.toml` dependencies:
 
 ```toml
 [dependencies]
-smath = "0.2.0"
+smath = "0.2.1"
 ```
 
 <sub>This project is licensed under the MIT License.</sub>
