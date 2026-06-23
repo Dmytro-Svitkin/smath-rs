@@ -12,8 +12,6 @@ fn round(x:f32)->f32{
   else {-floor(-x+0.5)}
 }
 
-pub use trigonometry::*;
-
 pub mod trigonometry{
     use super::{floor,round};
 
@@ -149,3 +147,14 @@ pub mod trigonometry{
         0.5-arctanr(x)
     }
 }
+    pub use trigonometry::*;
+
+pub mod conversion;
+    pub use conversion::*;
+    pub use conversion::length::*;
+    pub use conversion::weight::*;
+    pub use conversion::volume::*;
+    pub use conversion::speed::*;
+    pub use conversion::pressure::*;
+    pub use conversion::energy::*;
+    pub use conversion::time::*;
