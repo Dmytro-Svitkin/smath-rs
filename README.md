@@ -29,13 +29,29 @@ let millimeters = smath::length::in_mm(2.0); // 2 inches are converted to millim
 let hours = smath::time::d_h(1.5); // 1.5 of a day is converted to hours
 ```
 
+### Vectors (`smath::vector`)
+2D/3D/4D Vectors (`Vec2`, `Vec3`, `Vec4`) instances and their implementations: `one`, `zero`, `new`, `set`, `shift`.
+Full support for component-wise operations via standard Rust operator overloading (`+`, `-`, `*`, `/`, `-`, `+=`, `-=`, `*=`, `/=`).
+
+```rust
+// Example Usage
+use smath::vector::Vec3;
+
+let mut pos = Vec3::zero(); // 3D vector "pos" is equal to {0.0, 0.0, 0.0}
+pos.set(10.0, 5.0, 0.0); // "pos" is set to {10.0, 5.0, 0.0}
+pos.shift(1.0, 0.0, 0.0); // "pos" is shifted by {1.0, 0.0, 0.0} and is equal to {11.0, 5.0, 0.0}
+
+let velocity = Vec3::new(0.0, 2.0, 1.0); // 3D vector "velocity" is equal to {0.0, 2.0, 1.0}
+let next_frame = pos + (velocity * 2.0); // next_frame is equal to {11.0, 7.0, 2.0}
+```
+
 ## Installation
 
 Add `smath` to your `Cargo.toml` dependencies:
 
 ```toml
 [dependencies]
-smath = "0.2.1"
+smath = "0.3.0"
 ```
 
 <sub>This project is licensed under the MIT License.</sub>
