@@ -181,3 +181,38 @@ fn test_vec4() {
         assert!((rot_rad.x-0.0).abs()<2e-2);
         assert!((rot_rad.y-1.0).abs()<2e-2);
     }
+
+#[test]
+    fn test_vector_flat(){
+        // A vector tilted up at 45 degrees
+        // Total length sq = 50 + 50 = 100. z_sq = 50.
+        let v=Vec3::new(5.0,5.0,7.0710678);
+        let flattened=v.flat();
+
+        // The horizontal components should be scaled down evenly
+        assert!((flattened.x-3.5355).abs()<1e-3);
+        assert!((flattened.y-3.5355).abs()<1e-3);
+
+        // A perfectly vertical vector should collapse to zero safely
+        let vertical=Vec3::new(0.0,0.0,10.0);
+        let flat_vertical=vertical.flat();
+        assert_eq!(flat_vertical.x,0.0);
+        assert_eq!(flat_vertical.y,0.0);
+    }
+
+#[test]
+    fn test_vector_flat_output(){
+        let vectors=[
+            Vec3::new(10.0,0.0,0.0),
+            Vec3::new(5.0,5.0,5.0),
+            Vec3::new(3.0,4.0,12.0),
+            Vec3::new(0.0,0.0,15.0),
+        ];
+
+        println!("\n");
+        for v in vectors.iter(){
+            let res=v.flat();
+            println!("Original: [{:.4}, {:.4}, {:.4}] -> Flat: [{:.4}, {:.4}]",v.x,v.y,v.z,res.x,res.y);
+        }
+        println!("\n");
+    }

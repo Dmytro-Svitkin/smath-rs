@@ -484,6 +484,28 @@ impl Vec3{
                 self.x*other.y-self.y*other.x
             )
         }
+
+        /// Flattens the 3D vector by discarding the Z-axis (orthographic projection).
+        #[inline]
+        pub fn flat(&self)->Vec2{
+            Vec2::new(self.x,self.y)
+        }
+
+        /// Flattens the 3D vector onto the 2D XY plane, scaling the horizontal components based on the vertical Z tilt.
+        #[inline]
+        pub fn sp_flat(&self)->Vec2{
+            let rcl:f32=self.sq_length();
+            let z_sq:f32=self.z*self.z;
+            if z_sq>=rcl{Vec2::zero()}
+            else{let rcl:f32=sqrt(1.0-(z_sq/rcl));Vec2::new(self.x*rcl,self.y*rcl)}
+        }
+
+        /// Flattens the vector by dividing X and Y by Z (perspective projection).
+        #[inline]
+        pub fn persp(&self)->Vec2{
+            if self.z==0.0{Vec2::zero()}
+            else{Vec2::new(self.x/self.z,self.y/self.z)}
+        }
     }
 
     impl Add for Vec3{
