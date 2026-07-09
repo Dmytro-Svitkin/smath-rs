@@ -13,34 +13,17 @@ fn round(x:f32)->f32{
   //floor(x+0.5)
 }
 
-/// Approximate square root function
+/// Simplified square root.
 #[inline]
 pub fn sqrt(x:f32)->f32{
-    if x<0.0{return f32::NAN;}
-    if x==0.0||x==1.0||x==f32::INFINITY{return x;}
+    if x<0.0{return f32::NAN;}if x==0.0||x==f32::INFINITY{return x;}
+    let rcl:u32=x.to_bits();let rcl:f32=f32::from_bits(0x5f375a86-((rcl)>>1));let rcl:f32=rcl*(1.5-(0.5*x*rcl*rcl));let rcl:f32=x*rcl;0.5*(rcl+x/rcl)
+}
 
-    let x:u32=x.to_bits();
-    let mut rcl:i32=(((x>>23)&0xFF)as i32)-127;
-    let mut x:u32=(x&0x007F_FFFF)|0x0080_0000;
-
-    let rcl_odd:bool=(rcl&1)!=0;
-    if rcl_odd{x<<=1;}rcl>>=1;
-
-    let mut op:u32=x<<7;
-    let mut res:u32=0u32;
-    let mut one:u32=1u32<<30;
-
-    while one!=0{
-        if op>=res+one{op-=res+one;res=(res>>1)+one;}
-        else{res>>=1;}
-        one>>=2;
-    }
-
-    if rcl_odd{res=(res+1)>>1;}
-    
-    let x:u32=(res>>7)&0x007F_FFFF;
-    let rcl:u32=((rcl+127)as u32)<<23;
-    f32::from_bits(rcl|x)
+/// Simplified inverse square root.
+pub fn isqrt(x:f32)->f32{
+    if x<0.0{return f32::NAN;}if x==0.0||x==f32::INFINITY{return 0.0;}
+    let rcl:u32=x.to_bits();let rcl:f32=f32::from_bits(0x5f375a86-((rcl)>>1));let rcl:f32=rcl*(1.5-(0.5*x*rcl*rcl));rcl
 }
 
 pub mod trigonometry{
