@@ -110,3 +110,28 @@ fn test_vec4() {
         assert_eq!(cross.y,0.0);
         assert_eq!(cross.z,1.0);
     }
+
+#[test]
+    fn test_vector_angles_verbose(){
+        println!("\n");
+
+        let cases=[
+            (Vec2::new(1.0,1.7320508),"Quadrant 1 (Top-Right)"),
+            (Vec2::new(-2.0,2.0),"Quadrant 2 (Top-Left)"),
+            (Vec2::new(-1.0,-1.7320508),"Quadrant 3 (Bottom-Left)"),
+            (Vec2::new(3.0,-3.0),"Quadrant 4 (Bottom-Right)"),
+            (Vec2::new(0.0,-5.0),"Pure Axis (Straight Down)"),
+        ];
+
+        for (v,label) in cases{
+            let actual_deg=v.angle_deg();
+            let actual_rad_p=v.angle_rad();
+            let raw_ratio=if v.x!=0.0{ v.y/v.x }else{ 0.0 };
+
+            println!("\n[{}] Vector: ({}, {})",label,v.x,v.y);
+            println!("  Input ratio (y/x): {}",raw_ratio);
+            println!("  Your angle_deg() returned: {}",actual_deg);
+            println!("  Your angle_rad_p() returned: {}",actual_rad_p);
+        }
+        println!("\n");
+    }

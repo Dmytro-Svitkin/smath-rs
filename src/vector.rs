@@ -103,7 +103,7 @@ impl Vec2{
                 else{0.0}
             }
             else{
-                let rcl:f32=arctan(self.y/self.x)*180.0;
+                let rcl:f32=arctan(self.y/self.x);
                 if self.x<0.0{if self.y>=0.0{rcl+180.0}else{rcl-180.0}}
                 else{rcl}
             }
