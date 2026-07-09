@@ -51,7 +51,7 @@ Add `smath` to your `Cargo.toml` dependencies:
 
 ```toml
 [dependencies]
-smath = "0.3.0"
+smath = "0.3.1"
 ```
 
 <sub>This project is licensed under the MIT License.</sub>

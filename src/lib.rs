@@ -10,7 +10,6 @@ fn floor(x:f32)->f32{
 fn round(x:f32)->f32{
   if x>0.0{floor(x+0.5)}
   else {-floor(-x+0.5)}
-  //floor(x+0.5)
 }
 
 /// Simplified square root.
