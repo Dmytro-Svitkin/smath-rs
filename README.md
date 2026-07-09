@@ -30,7 +30,7 @@ let hours = smath::time::d_h(1.5); // 1.5 of a day is converted to hours
 ```
 
 ### Vectors (`smath::vector`)
-2D/3D/4D Vectors (`Vec2`, `Vec3`, `Vec4`) instances and their implementations: `one`, `zero`, `new`, `set`, `shift`.
+2D/3D/4D Vectors (`Vec2`, `Vec3`, `Vec4`) instances and their implementations: `one`, `zero`, `new`, `set`, `shift`, `dot`, `angle`, `perp`, `cross`.
 Full support for component-wise operations via standard Rust operator overloading (`+`, `-`, `*`, `/`, `-`, `+=`, `-=`, `*=`, `/=`).
 
 ```rust

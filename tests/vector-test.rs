@@ -77,3 +77,36 @@ fn test_vec4() {
     let mut m=Vec4::new(1.0,1.0,1.0,1.0);m+=Vec4::new(1.0,1.0,1.0,1.0);
     assert_eq!((m.x,m.y,m.z,m.w),(2.0,2.0,2.0,2.0));
 }
+
+#[test]
+    fn test_vec2_operations(){
+        let mut v1=Vec2::new(3.0,4.0);
+        let v2=Vec2::new(1.0,2.0);
+
+        // Test length and squared length
+        assert_eq!(v1.sq_length().round(),25.0);
+        assert_eq!(v1.length().round(),5.0);
+
+        // Test dot product
+        assert_eq!(v1.dot(v2),11.0); // 3*1 + 4*2
+
+        // Test distance
+        assert_eq!(v1.sq_distance(v2),8.0); // (3-1)^2 + (4-2)^2
+
+        // Test normalization
+        v1.normalize();
+        assert!((v1.length().round()-1.0).abs()<1e-5); // Should be a unit vector
+    
+    }
+
+    #[test]
+    fn test_vec3_cross(){
+        let v1=Vec3::new(1.0,0.0,0.0);
+        let v2=Vec3::new(0.0,1.0,0.0);
+        let cross=v1.cross(v2);
+
+        // Cross product of X and Y axes should point along the Z axis
+        assert_eq!(cross.x,0.0);
+        assert_eq!(cross.y,0.0);
+        assert_eq!(cross.z,1.0);
+    }
