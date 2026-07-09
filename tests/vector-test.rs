@@ -135,3 +135,49 @@ fn test_vec4() {
         }
         println!("\n");
     }
+
+#[test]
+    fn test_vector_manipulation(){
+        let v1=Vec2::new(10.0,20.0);
+        let v2=Vec2::new(20.0,40.0);
+
+        // Test lerp (halfway at t = 0.5)
+        let lerped=v1.lerp(v2,0.5);
+        assert_eq!(lerped.x,15.0);
+        assert_eq!(lerped.y,30.0);
+
+        // Test midpoint
+        let mid=v1.midpoint(v2);
+        assert_eq!(mid.x,15.0);
+        assert_eq!(mid.y,30.0);
+
+        // Test clamp
+        let v3=Vec2::new(5.0,50.0);
+        let min_bound=Vec2::new(10.0,10.0);
+        let max_bound=Vec2::new(30.0,30.0);
+        let clamped=v3.clamp(min_bound,max_bound);
+        assert_eq!(clamped.x,10.0); // Clamped up to min
+        assert_eq!(clamped.y,30.0); // Clamped down to max
+
+        // Test abs
+        let v4=Vec2::new(-5.5,-12.3);
+        let absolute=v4.abs();
+        assert_eq!(absolute.x,5.5);
+        assert_eq!(absolute.y,12.3);
+    }
+
+#[test]
+    fn test_vector_rotation_variants(){
+        let v=Vec2::new(1.0,0.0);
+
+        // Test 90 degrees rotation via both pathways
+        let rot_deg=v.rotate_deg(90.0);
+        let rot_rad=v.rotate_rad(0.5); // pi / 2
+
+        // Both pathways should rotate the vector up to the Y axis (0.0, 1.0)
+        assert!((rot_deg.x-0.0).abs()<2e-2);
+        assert!((rot_deg.y-1.0).abs()<2e-2);
+
+        assert!((rot_rad.x-0.0).abs()<2e-2);
+        assert!((rot_rad.y-1.0).abs()<2e-2);
+    }

@@ -1,6 +1,7 @@
 use core::ops::{Add,AddAssign,Div,DivAssign,Mul,MulAssign,Neg,Sub,SubAssign};
 use super::{sqrt,isqrt};
 use super::{arctan,arctanr};
+use super::{sin,cos,sinr,cosr};
 
 /// A 2D vector representing spatial coordinates (x, y).
 #[derive(Debug,Copy,Clone,Default)]
@@ -88,6 +89,62 @@ impl Vec2{
             dx*dx+dy*dy
         }
 
+        /// Linearly interpolates between this vector and another by a factor of t.
+        #[inline]
+        pub fn lerp(&self,other:Self,t:f32)->Self{
+            Self::new(
+                self.x+(other.x-self.x)*t,
+                self.y+(other.y-self.y)*t
+            )
+        }
+
+        /// Clamps the vector components between a minimum and maximum bounding vector.
+        #[inline]
+        pub fn clamp(&self,min:Self,max:Self)->Self{
+            Self::new(
+                if self.x<min.x{min.x}else if self.x>max.x{max.x}else{self.x},
+                if self.y<min.y{min.y}else if self.y>max.y{max.y}else{self.y}
+            )
+        }
+
+        /// Returns a vector containing the absolute value of each component.
+        #[inline]
+        pub fn abs(&self)->Self{
+            Self::new(
+                if self.x<0.0{-self.x}else{self.x},
+                if self.y<0.0{-self.y}else{self.y}
+            )
+        }
+
+        /// Finds the midpoint between this vector and another.
+        #[inline]
+        pub fn midpoint(&self,other:Self)->Self{
+            Self::new(
+                (self.x+other.x)*0.5,
+                (self.y+other.y)*0.5
+            )
+        }
+
+        /// Projects this vector onto another vector.
+        #[inline]
+        pub fn project(&self,other:Self)->Self{
+            let d:f32=other.sq_length();
+            if d==0.0{Self::new(0.0,0.0)}
+            else{other*(self.dot(other)/d)}
+        }
+
+        /// Rejects this vector from another vector (perpendicular component).
+        #[inline]
+        pub fn reject(&self,other:Self)->Self{
+            *self-self.project(other)
+        }
+
+        /// Reflects this vector off a surface defined by its normal vector.
+        #[inline]
+        pub fn reflect(&self,normal:Self)->Self{
+            *self-normal*(2.0*self.dot(normal))
+        }
+
         /// Returns a vector perpendicular to this one, rotated 90 degrees counter-clockwise.
         #[inline(always)]
         pub fn perp(&self)->Self{
@@ -134,6 +191,34 @@ impl Vec2{
         #[inline]
         pub fn angle_rad(&self)->f32{
             self.angler()
+        }
+
+        /// Rotates the 2D vector by a given angle (degrees, 45.0 = 45°).
+        #[inline]
+        pub fn rotate(&self,angle:f32)->Self{
+            let s:f32=sin(angle);
+            let c:f32=cos(angle);
+            Self::new(self.x*c-self.y*s,self.x*s+self.y*c)
+        }
+
+        /// Rotates the 2D vector by a given angle (radians, 1.0 = π).
+        #[inline]
+        pub fn rotater(&self,angle:f32)->Self{
+            let s:f32=sinr(angle);
+            let c:f32=cosr(angle);
+            Self::new(self.x*c-self.y*s,self.x*s+self.y*c)
+        }
+
+        /// Rotates the 2D vector by a given angle (degrees, 45.0 = 45°).
+        #[inline]
+        pub fn rotate_deg(&self,angle:f32)->Self{
+            self.rotate(angle)
+        }
+
+        /// Rotates the 2D vector by a given angle (radians, 1.0 = π).
+        #[inline]
+        pub fn rotate_rad(&self,angle:f32)->Self{
+            self.rotater(angle)
         }
     }
 
@@ -328,6 +413,66 @@ impl Vec3{
             let dy:f32=self.y-other.y;
             let dz:f32=self.z-other.z;
             dx*dx+dy*dy+dz*dz
+        }
+
+        /// Linearly interpolates between this vector and another by a factor of t.
+        #[inline]
+        pub fn lerp(&self,other:Self,t:f32)->Self{
+            Self::new(
+                self.x+(other.x-self.x)*t,
+                self.y+(other.y-self.y)*t,
+                self.z+(other.z-self.z)*t
+            )
+        }
+
+        /// Clamps the vector components between a minimum and maximum bounding vector.
+        #[inline]
+        pub fn clamp(&self,min:Self,max:Self)->Self{
+            Self::new(
+                if self.x<min.x{min.x}else if self.x>max.x{max.x}else{self.x},
+                if self.y<min.y{min.y}else if self.y>max.y{max.y}else{self.y},
+                if self.z<min.z{min.z}else if self.z>max.z{max.z}else{self.z}
+            )
+        }
+
+        /// Returns a vector containing the absolute value of each component.
+        #[inline]
+        pub fn abs(&self)->Self{
+            Self::new(
+                if self.x<0.0{-self.x}else{self.x},
+                if self.y<0.0{-self.y}else{self.y},
+                if self.z<0.0{-self.z}else{self.z}
+            )
+        }
+
+        /// Finds the midpoint between this vector and another.
+        #[inline]
+        pub fn midpoint(&self,other:Self)->Self{
+            Self::new(
+                (self.x+other.x)*0.5,
+                (self.y+other.y)*0.5,
+                (self.z+other.z)*0.5
+            )
+        }
+
+        /// Projects this vector onto another vector.
+        #[inline]
+        pub fn project(&self,other:Self)->Self{
+            let d:f32=other.sq_length();
+            if d==0.0{Self::new(0.0,0.0,0.0)}
+            else{other*(self.dot(other)/d)}
+        }
+
+        /// Rejects this vector from another vector (perpendicular component).
+        #[inline]
+        pub fn reject(&self,other:Self)->Self{
+            *self-self.project(other)
+        }
+
+        /// Reflects this vector off a surface defined by its normal vector.
+        #[inline]
+        pub fn reflect(&self,normal:Self)->Self{
+            *self-normal*(2.0*self.dot(normal))
         }
 
         /// Calculates the cross product of two vectors.
@@ -543,6 +688,70 @@ impl Vec4{
             let dz:f32=self.z-other.z;
             let dw:f32=self.w-other.w;
             dx*dx+dy*dy+dz*dz+dw*dw
+        }
+
+        /// Linearly interpolates between this vector and another by a factor of t.
+        #[inline]
+        pub fn lerp(&self,other:Self,t:f32)->Self{
+            Self::new(
+                self.x+(other.x-self.x)*t,
+                self.y+(other.y-self.y)*t,
+                self.z+(other.z-self.z)*t,
+                self.w+(other.w-self.w)*t
+            )
+        }
+
+        /// Clamps the vector components between a minimum and maximum bounding vector.
+        #[inline]
+        pub fn clamp(&self,min:Self,max:Self)->Self{
+            Self::new(
+                if self.x<min.x{min.x}else if self.x>max.x{max.x}else{self.x},
+                if self.y<min.y{min.y}else if self.y>max.y{max.y}else{self.y},
+                if self.z<min.z{min.z}else if self.z>max.z{max.z}else{self.z},
+                if self.w<min.w{min.w}else if self.w>max.w{max.w}else{self.w}
+            )
+        }
+
+        /// Returns a vector containing the absolute value of each component.
+        #[inline]
+        pub fn abs(&self)->Self{
+            Self::new(
+                if self.x<0.0{-self.x}else{self.x},
+                if self.y<0.0{-self.y}else{self.y},
+                if self.z<0.0{-self.z}else{self.z},
+                if self.w<0.0{-self.w}else{self.w}
+            )
+        }
+
+        /// Finds the midpoint between this vector and another.
+        #[inline]
+        pub fn midpoint(&self,other:Self)->Self{
+            Self::new(
+                (self.x+other.x)*0.5,
+                (self.y+other.y)*0.5,
+                (self.z+other.z)*0.5,
+                (self.w+other.w)*0.5
+            )
+        }
+
+        /// Projects this vector onto another vector.
+        #[inline]
+        pub fn project(&self,other:Self)->Self{
+            let d:f32=other.sq_length();
+            if d==0.0{Self::new(0.0,0.0,0.0,0.0)}
+            else{other*(self.dot(other)/d)}
+        }
+
+        /// Rejects this vector from another vector (perpendicular component).
+        #[inline]
+        pub fn reject(&self,other:Self)->Self{
+            *self-self.project(other)
+        }
+
+        /// Reflects this vector off a surface defined by its normal vector.
+        #[inline]
+        pub fn reflect(&self,normal:Self)->Self{
+            *self-normal*(2.0*self.dot(normal))
         }
     }
 

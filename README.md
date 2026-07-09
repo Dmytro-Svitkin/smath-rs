@@ -30,7 +30,7 @@ let hours = smath::time::d_h(1.5); // 1.5 of a day is converted to hours
 ```
 
 ### Vectors (`smath::vector`)
-2D/3D/4D Vectors (`Vec2`, `Vec3`, `Vec4`) instances and their implementations: `one`, `zero`, `new`, `set`, `shift`, `dot`, `angle`, `perp`, `cross`.
+2D/3D/4D Vectors (`Vec2`, `Vec3`, `Vec4`) instances and their implementations: `new`, `zero`, `one`, `set`, `shift`, `dot`, `cross`, `length`, `sq_length`, `distance`, `sq_distance`, `normalize`, `normalized`, `angle_deg`, `angle_rad`, `rotate`, `rotate_deg`, `rotate_rad`, `lerp`, `clamp`, `abs`, `midpoint`, `project`, `reject`, `reflect`.
 Full support for component-wise operations via standard Rust operator overloading (`+`, `-`, `*`, `/`, `-`, `+=`, `-=`, `*=`, `/=`).
 
 ```rust
@@ -42,7 +42,7 @@ pos.set(10.0, 5.0, 0.0); // "pos" is set to {10.0, 5.0, 0.0}
 pos.shift(1.0, 0.0, 0.0); // "pos" is shifted by {1.0, 0.0, 0.0} and is equal to {11.0, 5.0, 0.0}
 
 let velocity = Vec3::new(0.0, 2.0, 1.0); // 3D vector "velocity" is equal to {0.0, 2.0, 1.0}
-let next_frame = pos + (velocity * 2.0); // next_frame is equal to {11.0, 7.0, 2.0}
+let next_frame = pos + (velocity * 2.0); // next_frame is equal to {11.0, 9.0, 2.0}
 ```
 
 ## Installation
@@ -51,7 +51,7 @@ Add `smath` to your `Cargo.toml` dependencies:
 
 ```toml
 [dependencies]
-smath = "0.3.2"
+smath = "0.3.3"
 ```
 
 <sub>This project is licensed under the MIT License.</sub>
