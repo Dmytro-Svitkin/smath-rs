@@ -1,7 +1,6 @@
 use core::ops::{Add,AddAssign,Div,DivAssign,Mul,MulAssign,Neg,Sub,SubAssign};
 use super::{sqrt,isqrt};
-use super::{arctan,arctanr};
-use super::{sin,cos,sinr,cosr};
+use super::{sin,cos,sinr,cosr,arctan,arctanr};
 
 /// A 2D vector representing spatial coordinates (x, y).
 #[derive(Debug,Copy,Clone,Default)]
