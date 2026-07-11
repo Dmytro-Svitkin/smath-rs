@@ -22,9 +22,9 @@ impl SinFn for isize{
         let rcl:isize=self.rem_euclid(360);let x:isize=rcl/90;let rcl:isize=rcl%90;
         match x{
             0=>SIN[rcl as usize],
-            1=>SIN[(90-rcl) as usize],
+            1=>COS[rcl as usize],
             2=>-SIN[rcl as usize],
-            _=>-SIN[(90-rcl) as usize]
+            _=>-COS[rcl as usize]
         }
     }
 }
@@ -56,9 +56,9 @@ impl CosFn for isize{
         let rcl:isize=self.rem_euclid(360);let x:isize=rcl/90;let rcl:isize=rcl%90;
         match x{
             0=>COS[rcl as usize],
-            1=>-COS[(90-rcl) as usize],
+            1=>-SIN[rcl as usize],
             2=>-COS[rcl as usize],
-            _=>COS[(90-rcl) as usize]
+            _=>SIN[rcl as usize]
         }
     }
 }
@@ -99,7 +99,9 @@ impl TanFn for isize{
 
 /// Simplified tangens function (degrees, 45.0 = 45°).
 #[inline(always)]
-pub fn tg(x:f32)->f32{tan(x)}
+pub fn tg<T:TanFn>(x:T)->f32{
+    tan(x)
+}
 
 /// Simplified tangens function (radians, 1.0 = π).
 #[inline]
@@ -142,7 +144,7 @@ impl CotanFn for isize{
 
 /// Simplified cotangens function (degrees, 45.0 = 45°).
 #[inline(always)]
-pub fn ctg(x:f32)->f32{
+pub fn ctg<T:CotanFn>(x:T)->f32{
     cotan(x)
 }
 
@@ -193,6 +195,12 @@ pub fn arctan(x:f32)->f32{
     else{90.0/(-1.3*x+1.0)-90.0}
 }
 
+/// Simplified arc-tangens function (degrees, 45.0 = 45°).
+#[inline]
+pub fn atan(x:f32)->f32{
+    arctan(x)
+}
+
 /// Simplified arc-tangens function (radians, 1.0 = π).
 #[inline]
 pub fn arctanr(x:f32)->f32{
@@ -200,6 +208,12 @@ pub fn arctanr(x:f32)->f32{
     else if x>0.0{0.5-0.5/(1.3*x+1.0)}
     else if x>-2.0{let x:f32=-1.3*x;let rcl:f32=2.0-x;-(x/(x+1.0))*(0.5-(rcl*rcl*0.055555556))}
     else{1.0/(-2.6*x+2.0)-0.5}
+}
+
+/// Simplified arc-tangens function (radians, 1.0 = π).
+#[inline]
+pub fn atanr(x:f32)->f32{
+    arctanr(x)
 }
 
 /// Simplified arc-cotangens function (degrees, 45.0 = 45°).

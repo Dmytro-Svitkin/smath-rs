@@ -21,11 +21,11 @@ fn print_trig_values(){
         println!("tan({}.0)   = {}",a as f32,tan(a as f32));
         println!("tan({})     = {}",a,tan(a));
         println!("|");
-        assert_eq!(((tan(a as f32)*10.0).round())*0.1,((tan(a)*10.0).round())*0.1);
+        assert_eq!(((tan(a as f32)*10.0).round())*0.1,((tg(a)*10.0).round())*0.1);
 
         println!("cotan({}.0) = {}",a as f32,cotan(a as f32));
         println!("cotan({})   = {}",a,cotan(a));
         println!("");
-        assert_eq!(((cotan(a as f32)*10.0).round())*0.1,((cotan(a)*10.0).round())*0.1);
+        assert_eq!(((ctg(a as f32)*10.0).round())*0.1,((cotan(a)*10.0).round())*0.1);
     }
 }

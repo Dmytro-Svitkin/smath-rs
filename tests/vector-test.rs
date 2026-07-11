@@ -115,7 +115,7 @@ fn test_vec4() {
     fn test_vector_angles_verbose(){
         println!("\n");
 
-        let cases=[
+        let cases:[(Vec2,&str);5]=[
             (Vec2::new(1.0,1.7320508),"Quadrant 1 (Top-Right)"),
             (Vec2::new(-2.0,2.0),"Quadrant 2 (Top-Left)"),
             (Vec2::new(-1.0,-1.7320508),"Quadrant 3 (Bottom-Left)"),
@@ -124,9 +124,9 @@ fn test_vec4() {
         ];
 
         for (v,label) in cases{
-            let actual_deg=v.angle_deg();
-            let actual_rad_p=v.angle_rad();
-            let raw_ratio=if v.x!=0.0{ v.y/v.x }else{ 0.0 };
+            let actual_deg:f32=v.angle_deg();
+            let actual_rad_p:f32=v.angle_rad();
+            let raw_ratio:f32=if v.x!=0.0{v.y/v.x}else{0.0};
 
             println!("\n[{}] Vector: ({}, {})",label,v.x,v.y);
             println!("  Input ratio (y/x): {}",raw_ratio);
@@ -138,30 +138,26 @@ fn test_vec4() {
 
 #[test]
     fn test_vector_manipulation(){
-        let v1=Vec2::new(10.0,20.0);
-        let v2=Vec2::new(20.0,40.0);
+        let v1:Vec2=Vec2::new(10.0,20.0);
+        let v2:Vec2=Vec2::new(20.0,40.0);
 
-        // Test lerp (halfway at t = 0.5)
-        let lerped=v1.lerp(v2,0.5);
+        let lerped:Vec2=v1.lerp(v2,0.5);
         assert_eq!(lerped.x,15.0);
         assert_eq!(lerped.y,30.0);
 
-        // Test midpoint
-        let mid=v1.midpoint(v2);
+        let mid:Vec2=v1.midpoint(v2);
         assert_eq!(mid.x,15.0);
         assert_eq!(mid.y,30.0);
 
-        // Test clamp
-        let v3=Vec2::new(5.0,50.0);
-        let min_bound=Vec2::new(10.0,10.0);
-        let max_bound=Vec2::new(30.0,30.0);
-        let clamped=v3.clamp(min_bound,max_bound);
-        assert_eq!(clamped.x,10.0); // Clamped up to min
-        assert_eq!(clamped.y,30.0); // Clamped down to max
+        let v3:Vec2=Vec2::new(5.0,50.0);
+        let min_bound:Vec2=Vec2::new(10.0,10.0);
+        let max_bound:Vec2=Vec2::new(30.0,30.0);
+        let clamped:Vec2=v3.clamp(min_bound,max_bound);
+        assert_eq!(clamped.x,10.0);
+        assert_eq!(clamped.y,30.0);
 
-        // Test abs
-        let v4=Vec2::new(-5.5,-12.3);
-        let absolute=v4.abs();
+        let v4:Vec2=Vec2::new(-5.5,-12.3);
+        let absolute:Vec2=v4.abs();
         assert_eq!(absolute.x,5.5);
         assert_eq!(absolute.y,12.3);
     }
@@ -184,34 +180,30 @@ fn test_vec4() {
 
 #[test]
     fn test_vector_flat(){
-        // A vector tilted up at 45 degrees
-        // Total length sq = 50 + 50 = 100. z_sq = 50.
         let v=Vec3::new(5.0,5.0,7.0710678);
-        let flattened=v.flat();
+        let flattened:Vec2=v.sp_flat();
 
-        // The horizontal components should be scaled down evenly
         assert!((flattened.x-3.5355).abs()<1e-3);
         assert!((flattened.y-3.5355).abs()<1e-3);
 
-        // A perfectly vertical vector should collapse to zero safely
-        let vertical=Vec3::new(0.0,0.0,10.0);
-        let flat_vertical=vertical.flat();
+        let vertical:Vec3=Vec3::new(0.0,0.0,10.0);
+        let flat_vertical:Vec2=vertical.flat();
         assert_eq!(flat_vertical.x,0.0);
         assert_eq!(flat_vertical.y,0.0);
     }
 
 #[test]
     fn test_vector_flat_output(){
-        let vectors=[
+        let vectors:[Vec3;4]=[
             Vec3::new(10.0,0.0,0.0),
             Vec3::new(5.0,5.0,5.0),
             Vec3::new(3.0,4.0,12.0),
-            Vec3::new(0.0,0.0,15.0),
+            Vec3::new(0.0,0.0,15.0)
         ];
 
         println!("\n");
         for v in vectors.iter(){
-            let res=v.flat();
+            let res:Vec2=v.flat();
             println!("Original: [{:.4}, {:.4}, {:.4}] -> Flat: [{:.4}, {:.4}]",v.x,v.y,v.z,res.x,res.y);
         }
         println!("\n");
