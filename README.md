@@ -7,35 +7,81 @@
 ## Modules
 
 ### Trigonometry (`smath::trigonometry`)
-`sin`, `cos`, `tan`, `cotan`, `arcsin`, `arccos`, `arctan`, `arccotan`
+To input an angle in degrees, simply enter the numeric value - for example, `45.0` or `45`.  
+<sub>`isize` inputs are faster and more precise than `f32` values because they use lookup tables; `isize` inputs allow creating `const` values.</sub>
+
+| **Function** | **Alias** | **Input** | **Output** |
+| --- | --- | --- | --- |
+| Sinus | `sin` | Degrees `f32`, Degrees `isize` | `f32`, `f32` |
+| Cosinus | `cos` | Degrees `f32`, Degrees `isize` | `f32`, `f32` |
+| Tangens | `tan`, `tg` | Degrees `f32`, Degrees `isize` | `f32`, `f32` |
+| Cotangens | `cotan`, `ctg` | Degrees `f32`, Degrees `isize` | `f32`, `f32` |
+| Arc-Sinus | `arcsin`, `asin` | `f32` | Degrees `f32` |
+| Arc-Cosinus | `arccos`, `acos` | `f32` | Degrees `f32` |
+| Arc-Tangens | `arctan`, `atan` | `f32` | Degrees `f32` |
+| Arc-Cotangens | `arccotan`, `acotan` | `f32` | Degrees `f32` |
+
+To input an angle in radians, enter the numeric value directly - for example, `2.0` (for 2π radians).  
+There is no need to multiply the input by π; the functions interpret the value as radian.
+| **Function** | **Alias** | **Input** | **Output** |
+| --- | --- | --- | --- |
+| Sinus | `sin` | Radians `f32` | `f32` |
+| Cosinus | `cos` | Radians `f32` | `f32` |
+| Tangens | `tan`, `tg` | Radians `f32` | `f32` |
+| Cotangens | `cotan`, `ctg` | Radians `f32` | `f32` |
+| Arc-Sinus | `arcsin`, `asin` | `f32` | Radians `f32` |
+| Arc-Cosinus | `arccos`, `acos` | `f32` | Radians `f32` |
+| Arc-Tangens | `arctan`, `atan` | `f32` | Radians `f32` |
+| Arc-Cotangens | `arccotan`, `acotan` | `f32` | Radians `f32` |
+
+```rust
+// Example Usage
+
+const slope = tan(12);       // Slope from a 12° angle (isize is const‑friendly)
+let angle_rad = atanr(0.54); // Inverse tangent in radians, returns angle as f32
+let sinus_deg = sin(67.5);   // Sinus of a 67.5° angle
+
+```
 
 ### Unit Conversions (`smath::conversion`)
 All conversion functions follow a predictable strict shortcut format: `[from]_[to](value)` (e.g., `cm_inches(123.456)`, `second_hours(5.5)`). 
 Only primary units are listed below, but all cross-combinations and major aliases (e.g., `inch`, `inches`) are fully supported.
 
-| Category | Module Path | Supported Units (From / To) |
-| :--- | :--- | :--- |
-| **Length** | `smath::length::` | `mm`, `cm`, `dm`, `m`, `km`, `in`, `ft`, `yd`, `mi`, `nmi` |
-| **Weight** | `smath::weight::` | `mg`, `g`, `kg`, `oz`, `lb`, `st`, `tn`, `t` |
-| **Volume** | `smath::volume::` | `ml`, `l`, `floz`, `cp`, `pt`, `qt`, `gal` |
-| **Speed** | `smath::speed::` | `mps`, `kmh`, `mph`, `kt`, `mach` |
-| **Pressure**| `smath::pressure::`| `pa`, `psi`, `bar`, `atm` |
-| **Energy** | `smath::energy::` | `j`, `cal`, `hp`, `w` |
-| **Time** | `smath::time::` | `ms`, `s`, `min`, `h`, `d`, `wk`, `mo`, `yr` |
+| **Category** | **Module Path** | **Supported Units (From / To)** | **Input** | **Output** |
+| --- | --- | --- | --- | --- |
+| Length | `smath::length::` | `mm`, `cm`, `dm`, `m`, `km`, `in`, `ft`, `yd`, `mi`, `nmi` | `f32` | `f32` |
+| Weight | `smath::weight::` | `mg`, `g`, `kg`, `oz`, `lb`, `st`, `tn`, `t` | `f32` | `f32` |
+| Volume | `smath::volume::` | `ml`, `l`, `floz`, `cp`, `pt`, `qt`, `gal` | `f32` | `f32` |
+| Speed | `smath::speed::` | `mps`, `kmh`, `mph`, `kt`, `mach` | `f32` | `f32` |
+| Pressure | `smath::pressure::`| `pa`, `psi`, `bar`, `atm` | `f32` | `f32` |
+| Energy | `smath::energy::` | `j`, `cal`, `hp`, `w` | `f32` | `f32` |
+| Time | `smath::time::` | `ms`, `s`, `min`, `h`, `d`, `wk`, `mo`, `yr` | `f32` | `f32` |
+| Temperature | `smth::temperature::` | `c`, `f`, `k` | `f32` | `f32` |
 
 ```rust
 // Example Usage
+
 let millimeters = smath::length::in_mm(2.0); // 2 inches are converted to millimeters
 let hours = smath::time::d_h(1.5); // 1.5 of a day is converted to hours
 ```
 
 ### Vectors (`smath::vector`)
-2D/3D/4D Vectors (`Vec2`, `Vec3`, `Vec4`) instances and their implementations: `new`, `zero`, `one`, `set`, `shift`, `dot`, `cross`, `length`, `sq_length`, `distance`, `sq_distance`, `normalize`, `normalized`, `angle_deg`, `angle_rad`, `rotate`, `rotate_deg`, `rotate_rad`, `lerp`, `clamp`, `abs`, `midpoint`, `project`, `reject`, `reflect`.
-Full support for component-wise operations via standard Rust operator overloading (`+`, `-`, `*`, `/`, `-`, `+=`, `-=`, `*=`, `/=`).
+2D, 3D, and 4D vector types (`Vec2`, `Vec3`, `Vec4`) with a wide range of mathematical and geometric operations.
+
+| **Category** | **Methods** | **Description** |
+| --- | --- | --- |
+| Creation & Setup | `new`, `zero`, `one`, `set`, `shift` | Create or modify vector instances |
+| Math Operations | `dot`, `cross`, `length`, `sq_length`, `distance`, `sq_distance` | Core vector math and magnitude calculations |
+| Normalization | `normalize`, `normalized` | Scale vector to unit length |
+| Angles & Rotation | `angle_deg`, `angle_rad`, `rotate`, `rotate_deg`, `rotate_rad` | Compute or apply rotations and angles |
+| Interpolation & Clamping | `lerp`, `clamp`, `abs`, `midpoint` | Smooth transitions and value constraints |
+| Projection & Reflection | `project`, `reject`, `reflect` | Vector projection and reflection utilities |
+| 3D Vector Flattening | `flat`, `sp_flat`, `persp` | Convert or project 3D vectors into 2D space using flat, spherical, or perspective flattening |
+| Operators | `+`, `-`, `*`, `/`, `+=`, `-=`, `*=`, `/=` | Component‑wise arithmetic via Rust operator overloading |
+
 
 ```rust
 // Example Usage
-use smath::vector::Vec3;
 
 let mut pos = Vec3::zero(); // 3D vector "pos" is equal to {0.0, 0.0, 0.0}
 pos.set(10.0, 5.0, 0.0); // "pos" is set to {10.0, 5.0, 0.0}
