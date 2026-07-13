@@ -52,6 +52,31 @@ let angle_rad = atanr(0.54); // Inverse tangent in radians, returns angle as f32
 let sinus_deg = sin(67.5);   // Sinus of a 67.5° angle
 ```
 
+### Constants (`smath::constant`)
+
+| **Name** | **Category** | **Rust Type** | **Description** |
+| --- | --- | --- | --- |
+| `SIN` | Trigonometric | `[f32; 91]` | Sinus values for 0°-90° |
+| `COS` | Trigonometric | `[f32; 91]` | Cosinus values for 0°-90° |
+| `TAN`/`TG` | Trigonometric | `[f32; 91]` | Tangens values for 0°-90° |
+| `COTAN`/`CTG` | Trigonometric | `[f32; 91]` | Cotangens values for 0°-90° |
+| `PI` | Mathematical | `f32` | π (`3.14`) |
+| `E` | Mathematical | `f32` | Euler’s number (`2.72`) |
+| `PI_200` | Mathematical | `f64` | High‑precision π (200 digits) |
+| `E_200` | Mathematical | `f64` | High‑precision Euler’s number (200 digits) |
+| `ASCII` | Character set | `[char; 96]` | Printable ASCII characters |
+| `ASCII_STR` | Character set | `&str` | Printable ASCII string |
+| `BASE2` | Encoding | `[char; 2]` | Binary digits (0-1) |
+| `BASE10` | Encoding | `[char; 10]` | Decimal digits (0-9) |
+| `BASE16` | Encoding | `[char; 16]` | Hexadecimal digits (0-F) |
+| `BASE62` | Encoding | `[char; 62]` | Alphanumeric characters (0-9, A-Z, a-z) |
+| `BASE64` | Encoding | `[char; 64]` | Base64 alphabet (A-Z, a-z, 0-9, +, /) |
+| `BASE2_STR` | Encoding | `&str` | Binary string |
+| `BASE10_STR` | Encoding | `&str` | Decimal string |
+| `BASE16_STR` | Encoding | `&str` | Hexadecimal string |
+| `BASE62_STR` | Encoding | `&str` | Alphanumeric string |
+| `BASE64_STR` | Encoding | `&str` | Base64 string |
+
 ### Unit Conversions (`smath::conversion`)
 All conversion functions follow a predictable strict shortcut format: `[from]_[to](value)` (e.g., `cm_inches(123.456)`, `second_hours(5.5)`). 
 Only primary units are listed below, but all cross-combinations and major aliases (e.g., `inch`, `inches`) are fully supported.
