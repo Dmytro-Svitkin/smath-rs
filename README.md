@@ -25,14 +25,14 @@ To input an angle in radians, enter the numeric value directly - for example, `2
 There is no need to multiply the input by π; the functions interpret the value as radian.
 | **Function** | **Alias** | **Input** | **Output** |
 | --- | --- | --- | --- |
-| Sinus | `sin` | Radians `f32` | `f32` |
-| Cosinus | `cos` | Radians `f32` | `f32` |
-| Tangens | `tan`, `tg` | Radians `f32` | `f32` |
-| Cotangens | `cotan`, `ctg` | Radians `f32` | `f32` |
-| Arc-Sinus | `arcsin`, `asin` | `f32` | Radians `f32` |
-| Arc-Cosinus | `arccos`, `acos` | `f32` | Radians `f32` |
-| Arc-Tangens | `arctan`, `atan` | `f32` | Radians `f32` |
-| Arc-Cotangens | `arccotan`, `acotan` | `f32` | Radians `f32` |
+| Sinus | `sinr` | Radians `f32` | `f32` |
+| Cosinus | `cosr` | Radians `f32` | `f32` |
+| Tangens | `tanr`, `tgr` | Radians `f32` | `f32` |
+| Cotangens | `cotanr`, `ctgr` | Radians `f32` | `f32` |
+| Arc-Sinus | `arcsinr`, `asinr` | `f32` | Radians `f32` |
+| Arc-Cosinus | `arccosr`, `acosr` | `f32` | Radians `f32` |
+| Arc-Tangens | `arctanr`, `atanr` | `f32` | Radians `f32` |
+| Arc-Cotangens | `arccotanr`, `acotanr` | `f32` | Radians `f32` |
 
 ```rust
 // Example Usage
