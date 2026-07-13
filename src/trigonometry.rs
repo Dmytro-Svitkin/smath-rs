@@ -3,28 +3,15 @@ use super::constant::{COS,SIN,TAN,COTAN};
 
 /// Simplified sinus function (degrees, 45.0 = 45°).
 #[inline]
-pub fn sin<T:SinFn>(x:T)->f32{x.sin()}
-
-pub trait SinFn{fn sin(self)->f32;}
-
-impl SinFn for f32{
-    #[inline]
-    fn sin(self)->f32{
-        #[inline(always)]
-        const fn rcl(x:f32)->f32{
-            let x:f32=x-floor(x*0.0027777778)*360.0;
-            if x<180.0{let rcl:f32=x*0.011111111-1.0;let rcl:f32=rcl*rcl;(1.0-rcl)*(1.0-0.2240081*rcl)}
-            else{let rcl:f32=x*0.011111111-3.0;let rcl:f32=rcl*rcl;(rcl-1.0)*(1.0-0.2240081*rcl)}
-        }
-        rcl(self)
-    }
+pub const fn sin(x:f32)->f32{
+    let x:f32=x-floor(x*0.0027777778)*360.0;
+    if x<180.0{let rcl:f32=x*0.011111111-1.0;let rcl:f32=rcl*rcl;(1.0-rcl)*(1.0-0.2240081*rcl)}
+    else{let rcl:f32=x*0.011111111-3.0;let rcl:f32=rcl*rcl;(rcl-1.0)*(1.0-0.2240081*rcl)}
 }
 
-impl SinFn for isize{
-    #[inline]
-    fn sin(self)->f32{
-        #[inline(always)]
-        const fn rcl(x:isize)->f32{
+/// Simplified sinus function (degrees, 45 = 45°).
+#[inline]
+pub const fn sin_int(x:isize)->f32{
             let x:isize=x.rem_euclid(360);let rcl:isize=x/90;let x:isize=x%90;
             match rcl{
                 0=>SIN[x as usize],
@@ -32,9 +19,6 @@ impl SinFn for isize{
                 2=>-SIN[x as usize],
                 _=>-COS[x as usize]
             }
-        }
-        rcl(self)
-    }
 }
 
 /// Simplified sinus function (radians, 1.0 = π).
@@ -47,39 +31,22 @@ pub const fn sinr(x:f32)->f32{
 
 /// Simplified cosinus function (degrees, 45.0 = 45°).
 #[inline]
-pub fn cos<T:CosFn>(x:T)->f32{x.cos()}
+pub const fn cos(x:f32)->f32{
+    sin(x+90.0)
+}
 
-pub trait CosFn{fn cos(self)->f32;}
-
-impl CosFn for f32{
-    #[inline]
-    fn cos(self)->f32{
-        #[inline(always)]
-        const fn rcl(x:f32)->f32{
-            let x:f32=x-floor(x*0.0027777778)*360.0;
-            if x<180.0{let rcl:f32=x*0.011111111-1.0;let rcl:f32=rcl*rcl;(1.0-rcl)*(1.0-0.2240081*rcl)}
-            else{let rcl:f32=x*0.011111111-3.0;let rcl:f32=rcl*rcl;(rcl-1.0)*(1.0-0.2240081*rcl)}
-        }
-        rcl(self+90.0)
+/// Simplified cosinus function (degrees, 45 = 45°).
+#[inline]
+pub const fn cos_int(x:isize)->f32{
+    let x:isize=x.rem_euclid(360);let rcl:isize=x/90;let x:isize=x%90;
+    match rcl{
+        0=>COS[x as usize],
+        1=>-SIN[x as usize],
+        2=>-COS[x as usize],
+        _=>SIN[x as usize]
     }
 }
 
-impl CosFn for isize{
-    #[inline]
-    fn cos(self)->f32{
-        #[inline(always)]
-        const fn rcl(x:isize)->f32{
-            let x:isize=x.rem_euclid(360);let rcl:isize=x/90;let x:isize=x%90;
-            match rcl{
-                0=>COS[x as usize],
-                1=>-SIN[x as usize],
-                2=>-COS[x as usize],
-                _=>SIN[x as usize]
-            }
-        }
-        rcl(self)
-    }
-}
 
 /// Simplified cosinus function (radians, 1.0 = π).
 #[inline]
@@ -90,43 +57,33 @@ pub const fn cosr(x:f32)->f32{
 
 /// Simplified tangens function (degrees, 45.0 = 45°).
 #[inline]
-pub fn tan<T:TanFn>(x:T)->f32{x.tan()}
-
-pub trait TanFn{fn tan(self)->f32;}
-
-impl TanFn for f32{
-    #[inline]
-    fn tan(self)->f32{
-        #[inline(always)]
-        const fn rcl(x:f32)->f32{
-            let x:f32=x*0.0055555556;let x:f32=(x-round(x))*180.0;
-            let rcl:f32=x*x;(x*(141.37167-0.0031465*rcl))/(8100.0-rcl)
-        }
-        rcl(self)
-    }
+pub const fn tan(x:f32)->f32{
+    let x:f32=x*0.0055555556;let x:f32=(x-round(x))*180.0;
+    let rcl:f32=x*x;(x*(141.37167-0.0031465*rcl))/(8100.0-rcl)
 }
 
-impl TanFn for isize{
-    #[inline]
-    fn tan(self)->f32{
-        #[inline(always)]
-        const fn rcl(x:isize)->f32{
-            let x:isize=x.rem_euclid(360);let rcl:isize=x/90;let x:isize=x%90;
-            match rcl{
-                0=>TAN[x as usize],
-                1=>-COTAN[x as usize],
-                2=>TAN[x as usize],
-                _=>-COTAN[x as usize]
-            }
-        }
-        rcl(self)
+/// Simplified tangens function (degrees, 45 = 45°).
+#[inline]
+pub const fn tan_int(x:isize)->f32{
+    let x:isize=x.rem_euclid(360);let rcl:isize=x/90;let x:isize=x%90;
+    match rcl{
+        0=>TAN[x as usize],
+        1=>-COTAN[x as usize],
+        2=>TAN[x as usize],
+        _=>-COTAN[x as usize]
     }
 }
 
 /// Simplified tangens function (degrees, 45.0 = 45°).
 #[inline(always)]
-pub fn tg<T:TanFn>(x:T)->f32{
+pub const fn tg(x:f32)->f32{
     tan(x)
+}
+
+/// Simplified tangens function (degrees, 45 = 45°).
+#[inline(always)]
+pub const fn tg_int(x:isize)->f32{
+    tan_int(x)
 }
 
 /// Simplified tangens function (radians, 1.0 = π).
@@ -144,43 +101,32 @@ pub const fn tgr(x:f32)->f32{
 
 /// Simplified cotangens function (degrees, 45.0 = 45°).
 #[inline]
-pub fn cotan<T:CotanFn>(x:T)->f32{x.cotan()}
-
-pub trait CotanFn{fn cotan(self)->f32;}
-
-impl CotanFn for f32{
-    #[inline]
-    fn cotan(self)->f32{
-        #[inline(always)]
-        const fn rcl(x:f32)->f32{
-            let x:f32=x*0.0055555556;let x:f32=(x-round(x))*180.0;
-            let rcl:f32=x*x;(x*(141.37167-0.0031465*rcl))/(8100.0-rcl)
-        }
-        -rcl(self+90.0)
-    }
+pub const fn cotan(x:f32)->f32{
+    -tan(x+90.0)
 }
 
-impl CotanFn for isize{
-    #[inline]
-    fn cotan(self)->f32{
-        #[inline(always)]
-        const fn rcl(x:isize)->f32{
-            let x:isize=x.rem_euclid(360);let rcl:isize=x/90;let x:isize=x%90;
-            match rcl{
-                0=>COTAN[x as usize],
-                1=>-TAN[x as usize],
-                2=>COTAN[x as usize],
-                _=>-TAN[x as usize]
-            }
-        }
-        rcl(self)
+/// Simplified cotangens function (degrees, 45 = 45°).
+#[inline]
+pub const fn cotan_int(x:isize)->f32{
+    let x:isize=x.rem_euclid(360);let rcl:isize=x/90;let x:isize=x%90;
+    match rcl{
+        0=>COTAN[x as usize],
+        1=>-TAN[x as usize],
+        2=>COTAN[x as usize],
+        _=>-TAN[x as usize]
     }
 }
 
 /// Simplified cotangens function (degrees, 45.0 = 45°).
 #[inline(always)]
-pub fn ctg<T:CotanFn>(x:T)->f32{
+pub const fn ctg(x:f32)->f32{
     cotan(x)
+}
+
+/// Simplified cotangens function (degrees, 45 = 45°).
+#[inline(always)]
+pub const fn ctg_int(x:isize)->f32{
+    cotan_int(x)
 }
 
 /// Simplified cotangens function (radians, 1.0 = π).

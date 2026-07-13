@@ -7,22 +7,32 @@
 ## Modules
 
 ### Trigonometry (`smath::trigonometry`)
-To input an angle in degrees, simply enter the numeric value - for example, `45.0` or `45`.  
-<sub>`isize` inputs are faster and more precise than `f32` values because they use lookup tables; `isize` inputs allow creating `const` values.</sub>
+To input an angle in degrees, enter the numeric value - for example, `45.0`.  
 
 | **Function** | **Alias** | **Input** | **Output** |
 | --- | --- | --- | --- |
-| Sinus | `sin` | Degrees `f32`, Degrees `isize` | `f32`, `f32` |
-| Cosinus | `cos` | Degrees `f32`, Degrees `isize` | `f32`, `f32` |
-| Tangens | `tan`, `tg` | Degrees `f32`, Degrees `isize` | `f32`, `f32` |
-| Cotangens | `cotan`, `ctg` | Degrees `f32`, Degrees `isize` | `f32`, `f32` |
+| Sinus | `sin` | Degrees `f32` | `f32` |
+| Cosinus | `cos` | Degrees `f32` | `f32` |
+| Tangens | `tan`, `tg` | Degrees `f32` | `f32` |
+| Cotangens | `cotan`, `ctg` | Degrees `f32` | `f32` |
 | Arc-Sinus | `arcsin`, `asin` | `f32` | Degrees `f32` |
 | Arc-Cosinus | `arccos`, `acos` | `f32` | Degrees `f32` |
 | Arc-Tangens | `arctan`, `atan` | `f32` | Degrees `f32` |
 | Arc-Cotangens | `arccotan`, `acotan` | `f32` | Degrees `f32` |
 
-To input an angle in radians, enter the numeric value directly - for example, `2.0` (for 2π radians).  
+To input an angle in degrees using `isize`, enter the numeric value — for example, `45` (for 45°).
+<sub>`isize` inputs are faster and more precise than `f32` values because they use lookup tables.</sub>
+
+| **Function** | **Alias** | **Input** | **Output** |
+| --- | --- | --- | --- |
+| Sinus | `sin_int` | Degrees `isize` | `f32` |
+| Cosinus | `cos_int` | Degrees `isize` | `f32` |
+| Tangens | `tan_int`, `tg_int` | Degrees `isize` | `f32` |
+| Cotangens | `cotan_int`, `ctg_int` | Degrees `isize` | `f32` |
+
+To input an angle in radians, enter the numeric value - for example, `2.0` (for 2π radians).  
 There is no need to multiply the input by π; the functions interpret the value as radian.
+
 | **Function** | **Alias** | **Input** | **Output** |
 | --- | --- | --- | --- |
 | Sinus | `sinr` | Radians `f32` | `f32` |
