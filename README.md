@@ -40,7 +40,6 @@ There is no need to multiply the input by π; the functions interpret the value 
 const slope = tan(12);       // Slope from a 12° angle (isize is const‑friendly)
 let angle_rad = atanr(0.54); // Inverse tangent in radians, returns angle as f32
 let sinus_deg = sin(67.5);   // Sinus of a 67.5° angle
-
 ```
 
 ### Unit Conversions (`smath::conversion`)
