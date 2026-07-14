@@ -16343,3 +16343,148 @@ pub mod time{
         yr_mo(x)
     }
 }
+
+pub mod temperature{
+        /// Convert celsius to farenheit.
+        #[inline]
+        pub const fn c_f(x:f32)->f32{
+            x*1.8+32
+        }
+
+        /// Convert celsius to kelvin.
+        #[inline]
+        pub const fn c_k(x:f32)->f32{
+            x+273.15
+        }
+
+        /// Convert farenheit to celsius.
+        #[inline]
+        pub const fn f_c(x:f32)->f32{
+            x*0.55555556-17.77777778
+        }
+
+        /// Convert farenheit to kelvin.
+        #[inline]
+        pub const fn f_k(x:f32)->f32{
+            x*0.55555556+255.3722222222222
+        }
+
+        /// Convert kelvin to celsius.
+        #[inline]
+        pub const fn k_c(x:f32)->f32{
+            x-273.15
+        }
+
+        /// Convert kelvin to farenheit.
+        #[inline]
+        pub const fn k_f(x:f32)->f32{
+            x*1.8-459.66999999        }
+
+        /// Convert celsius to farenheit.
+        #[inline(always)]
+        pub const fn c_farenheit(x:f32)->f32{
+            c_f(x)
+        }
+
+        /// Convert celsius to farenheit.
+        #[inline(always)]
+        pub const fn celsius_f(x:f32)->f32{
+            c_f(x)
+        }
+
+        /// Convert celsius to farenheit.
+        #[inline(always)]
+        pub const fn celsius_farenheit(x:f32)->f32{
+            c_f(x)
+        }
+
+        /// Convert celsius to kelvin.
+        #[inline(always)]
+        pub const fn c_kelvin(x:f32)->f32{
+            c_k(x)
+        }
+
+        /// Convert celsius to kelvin.
+        #[inline(always)]
+        pub const fn celsius_k(x:f32)->f32{
+            c_k(x)
+        }
+
+        /// Convert celsius to kelvin.
+        #[inline(always)]
+        pub const fn celsius_kelvin(x:f32)->f32{
+            c_k(x)
+        }
+
+        /// Convert farenheit to celsius.
+        #[inline(always)]
+        pub const fn f_celsius(x:f32)->f32{
+            f_c(x)
+        }
+
+        /// Convert farenheit to celsius.
+        #[inline(always)]
+        pub const fn farenheit_c(x:f32)->f32{
+            f_c(x)
+        }
+
+        /// Convert farenheit to celsius.
+        #[inline(always)]
+        pub const fn farenheit_celsius(x:f32)->f32{
+            f_c(x)
+        }
+
+        /// Convert farenheit to kelvin.
+        #[inline(always)]
+        pub const fn f_kelvin(x:f32)->f32{
+            f_k(x)
+        }
+
+        /// Convert farenheit to kelvin.
+        #[inline(always)]
+        pub const fn farenheit_k(x:f32)->f32{
+            f_k(x)
+        }
+
+        /// Convert farenheit to kelvin.
+        #[inline(always)]
+        pub const fn farenheit_kelvin(x:f32)->f32{
+            f_k(x)
+        }
+
+        /// Convert kelvin to celsius.
+        #[inline(always)]
+        pub const fn k_celsius(x:f32)->f32{
+            k_c(x)
+        }
+
+        /// Convert kelvin to celsius.
+        #[inline(always)]
+        pub const fn kelvin_c(x:f32)->f32{
+            k_c(x)
+        }
+
+        /// Convert kelvin to celsius.
+        #[inline(always)]
+        pub const fn kelvin_celsius(x:f32)->f32{
+            k_c(x)
+        }
+
+        /// Convert kelvin to farenheit.
+        #[inline(always)]
+        pub const fn k_farenheit(x:f32)->f32{
+            k_f(x)
+        }
+
+        /// Convert kelvin to farenheit.
+        #[inline(always)]
+        pub const fn kelvin_f(x:f32)->f32{
+            k_f(x)
+        }
+
+        /// Convert kelvin to farenheit.
+        #[inline(always)]
+        pub const fn kelvin_farenheit(x:f32)->f32{
+            k_f(x)
+        }
+}
