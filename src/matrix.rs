@@ -36,7 +36,7 @@ impl<const ROW:usize,const COL:usize>Mat<ROW,COL>{
 
     /// Retrieves a column at the given index (row, col) as an array.
     #[inline]
-    pub fn get_column(&self,col:usize)->[f32;ROW]{
+    pub fn get_col(&self,col:usize)->[f32;ROW]{
         debug_assert!(col<COL);
         self.data[col]
     }
@@ -64,7 +64,7 @@ impl<const ROW:usize,const COL:usize>Mat<ROW,COL>{
 
     /// Sets a column at the given index (row, col) to the given array.
     #[inline]
-    pub fn set_column(&mut self,col:usize,arr:[f32;ROW]){
+    pub fn set_col(&mut self,col:usize,arr:[f32;ROW]){
         debug_assert!(col<COL);
         self.data[col]=arr;
     }
@@ -78,26 +78,26 @@ impl<const ROW:usize,const COL:usize>Mat<ROW,COL>{
         }
     }
 
-    /// Shifts a single element at the given index (row, col) by a given scalar value.
+    /// Shifts all elements in the matrix to the given value.
     #[inline]
-    pub fn shift_cell(&mut self,row:usize,col:usize,val:f32){
-        debug_assert!(row<ROW&&col<COL);
-        self.data[col][row]+=val
-    }
-
-    /// Shifts all elements in the matrix by a given scalar value.
-    #[inline]
-    pub fn shift_all(&mut self,x:f32){
+    pub fn set_all(&mut self,x:f32){
         for col in 0..COL{
             for row in 0..ROW{
-                self.data[col][row]+=x;
+                self.data[col][row]=x;
             }
         }
     }
 
+    /// Shifts a single element at the given index (row, col) by the given value.
+    #[inline]
+    pub fn shift(&mut self,row:usize,col:usize,val:f32){
+        debug_assert!(row<ROW&&col<COL);
+        self.data[col][row]+=val
+    }
+
     /// Shifts a column at the given index (row, col) the given array.
     #[inline]
-    pub fn shift_column(&mut self,col:usize,arr:[f32;ROW]){
+    pub fn shift_col(&mut self,col:usize,arr:[f32;ROW]){
         debug_assert!(col<COL);
         for row in 0..ROW{
             self.data[col][row]+=arr[row];
@@ -110,6 +110,16 @@ impl<const ROW:usize,const COL:usize>Mat<ROW,COL>{
         debug_assert!(row<ROW);
         for col in 0..COL{
             self.data[col][row]+=arr[col]
+        }
+    }
+
+    /// Shifts all elements in the matrix by the given value.
+    #[inline]
+    pub fn shift_all(&mut self,x:f32){
+        for col in 0..COL{
+            for row in 0..ROW{
+                self.data[col][row]+=x;
+            }
         }
     }
 
@@ -190,15 +200,15 @@ impl Mat<4,4>{
         let c:f32=cos(angle);
         let s:f32=sin(angle);
         res.data[0][0]=c;
-        res.data[0][2]=-s;
-        res.data[2][0]=s;
+        res.data[0][2]=s;
+        res.data[2][0]=-s;
         res.data[2][2]=c;
         res
     }
 
     /// Creates a perspective projection matrix (standard OpenGL depth).
     #[inline]
-    pub fn perspective(fov_y:f32,aspect:f32,near:f32,far:f32)->Self{
+    pub fn persp(fov_y:f32,aspect:f32,near:f32,far:f32)->Self{
         let mut res:Mat<4,4>=Self::zero();
         let fov_y:f32=1.0/tan(fov_y/2.0);
         res.data[0][0]=fov_y/aspect;
@@ -218,7 +228,7 @@ impl Mat<4,4>{
         let tx:f32=-right.dot(pos);
         let ty:f32=-up.dot(pos);
         let tz:f32=-forward.dot(pos);
-        Self{data:[[right.x,right.y,right.z,0.0],[up.x,up.y,up.z,0.0],[forward.x,forward.y,forward.z,0.0],[tx,ty,tz,1.0]]}
+        Self{data:[[right.x,up.x,forward.x,0.0],[right.y,up.y,forward.y,0.0],[right.z,up.z,forward.z,0.0],[tx,ty,tz,1.0]]}
     }
 }
 

@@ -123,15 +123,40 @@ pos.shift(1.0, 0.0, 0.0); // "pos" is shifted by {1.0, 0.0, 0.0} and is equal to
 
 let velocity = Vec3::new(0.0, 2.0, 1.0); // 3D vector "velocity" is equal to {0.0, 2.0, 1.0}
 let next_frame = pos + (velocity * 2.0); // next_frame is equal to {11.0, 9.0, 2.0}
+let flat_vel = velocity.flat(); // velocity is flattened to {0.0, 2.0}
 ```
 
+## Martices (`smath::matrix`)
+Matrix types (`Mat3`, `Mat4`, and generic `Mat<ROW, COL>`) providing const‑generic, column‑major storage with full arithmetic and transformation support.
+
+| **Category** | **Methods** | **Description** |
+| --- | --- | --- |
+| Creation & Setup | `new`, `zero`, `fill`, `identity`, `set`, `set_row`, `set_col`, `set_all`, `shift`, `shift_row`, `shift_col`, `shift_all` | Create or modify matrix instances |
+| Access | `get`, `get_row`, `get_col` | Retrieve elements, rows, and columns |
+| Transposition | `transpose`, `transposed` | Return or apply matrix transpose |
+| Trace | `trace` | Sum of diagonal elements |
+| Transformations (4×4) | `translation`, `scale`, `rotate_x`, `rotate_y` | Build common 3D transform matrices |
+| Projection | `persp` | Perspective projection |
+| View Matrix | `view` | Camera look‑at transformation |
+| Operators | `+`, `-`, `*`, `/`, `+=`, `-=`, `*=`, `/=` | Component‑wise arithmetic via Rust operator overloading |
+
+```rust
+// Example Usage
+
+let mut m = Mat4::identity(); // Create a 4×4 identity matrix
+let t = Mat4::translation(1.0, 2.0, 3.0); // Apply translation
+let combined = m * t; // Combine transforms
+let v = Vec4::new(1.0, 0.0, 0.0, 1.0); // Multiply by a vector
+let transformed = combined * v;
+let trace_val = combined.trace(); // Compute trace
+```
 ## Installation
 
 Add `smath` to your `Cargo.toml` dependencies:
 
 ```toml
 [dependencies]
-smath = "0.3.3"
+smath = "0.4.0"
 ```
 
 <sub>This project is licensed under the MIT License.</sub>
