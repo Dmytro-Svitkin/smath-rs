@@ -81,7 +81,7 @@ let sinus_deg = sin(67.5);   // Sinus of a 67.5° angle
 All conversion functions follow a predictable strict shortcut format: `[from]_[to](value)` (e.g., `cm_inches(123.456)`, `second_hours(5.5)`). 
 Only primary units are listed below, but all cross-combinations and major aliases (e.g., `inch`, `inches`) are fully supported.
 
-| **Category** | **Module Path** | **Supported Units (From / To)** | **Input** | **Output** |
+| **Category** | **Module Path** | **Supported Units (From / To)** | **Function Input** | **Funcion Output** |
 | --- | --- | --- | --- | --- |
 | Length | `smath::length::` | `mm`, `cm`, `dm`, `m`, `km`, `in`, `ft`, `yd`, `mi`, `nmi` | `f32` | `f32` |
 | Weight | `smath::weight::` | `mg`, `g`, `kg`, `oz`, `lb`, `st`, `tn`, `t` | `f32` | `f32` |

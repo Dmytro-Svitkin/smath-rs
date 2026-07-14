@@ -1,7 +1,7 @@
 use smath::trigonometry::*;
 
 #[test]
-fn print_trig_values(){
+fn int_trig_values(){
     let angles:[isize;14]=[0,15,30,45,60,75,90,105,120,135,150,165,180,-12342];
 
     for a in angles{
