@@ -41,6 +41,7 @@ pub mod conversion;
     pub use conversion::pressure::*;
     pub use conversion::energy::*;
     pub use conversion::time::*;
+    pub use conversion::temperature::*;
 
 pub mod vector;
     pub use vector::*;

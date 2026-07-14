@@ -16348,7 +16348,7 @@ pub mod temperature{
         /// Convert celsius to farenheit.
         #[inline]
         pub const fn c_f(x:f32)->f32{
-            x*1.8+32
+            x*1.8+32.0
         }
 
         /// Convert celsius to kelvin.
